@@ -259,7 +259,9 @@
 				function showTtile() {
 					var htitle = $('#htitle');
 					var dateTitle = '';
-					var merryDate = new Date('2013-01-24').getTime();
+
+					// var merryDate = new Date('2013-01-24').getTime();
+					var merryDate = new Date(2013, 0, 24).getTime();
 					var nowDate = new Date().getTime();
 					var times = 0;
 					if (nowDate < merryDate) {
@@ -274,9 +276,6 @@
 			    var g = Math.floor(f / (3600 * 24));
 			    f = f % (3600 * 24);
 			    var b = Math.floor(f / 3600);
-			    if (b < 10) {
-			      b = "0" + b
-			    }
 			    f = f % 3600;
 			    var d = Math.floor(f / 60);
 			    f = f % 60;
