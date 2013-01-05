@@ -23,19 +23,22 @@
 				color:#000;
 			}
 			h1.title{
-				text-indent:-9000px;
+				/*text-indent:-9000px;*/
 				position:absolute;
 				top:0px;
 				left:0px;
 				width:563px;
 				height:88px;
-				background:transparent url(images/title.png) no-repeat top left;
+				font-family: "sans-serif";
+				font-size: 24px;
+				color: #666;
+				/*background:transparent url(images/title.png) no-repeat top left;*/
 			}
 		</style>
 	</head>
 	<body>
 		<div>
-			<h1 class="title">Interactive Photo Desk with jQuery and CSS3</h1>
+			<h1 class="title" id="htitle">离那天还有</h1>
 			<span class="reference">
 				<a href="http://tympanus.net/codrops/2010/07/01/interactive-photo-desk">© Codrops</a>
 			</span>
@@ -165,7 +168,7 @@
 				</div>
 				<span class="delete"></span>
 			</div>
-			<div class="pd_photo">
+<!-- 			<div class="pd_photo">
 				<div class="pd_hold">
 					<img src="photos/20.jpeg" alt=""/>
 				</div>
@@ -242,7 +245,7 @@
 					<img src="photos/32.jpeg" alt=""/>
 				</div>
 				<span class="delete"></span>
-			</div>
+			</div> -->
 		</div>
 
 		<!-- The JavaScript -->
@@ -252,6 +255,38 @@
 		<script src="jquery.animate-shadow-min.js"></script>
 		<script type="text/javascript">
 			$(function() {
+				//显示倒计时
+				function showTtile() {
+					var htitle = $('#htitle');
+					var dateTitle = '';
+					var merryDate = new Date('2013-01-30').getTime();
+					var nowDate = new Date().getTime();
+					var times = 0;
+					if (nowDate < merryDate) {
+						var times = merryDate - nowDate;
+						dateTitle = '距离结婚那天还有: ';
+					} else {
+						var times = nowDate - merryDate;
+						dateTitle = '已经结婚:' ;
+					}
+					
+					var f = times / 1000;
+			    var g = Math.floor(f / (3600 * 24));
+			    f = f % (3600 * 24);
+			    var b = Math.floor(f / 3600);
+			    if (b < 10) {
+			      b = "0" + b
+			    }
+			    f = f % 3600;
+			    var d = Math.floor(f / 60);
+			    f = f % 60;
+			    f = Math.floor(f);
+					dateTitle += g + ' 天 ' + b + ' 小时 ' + d + ' 分钟 ' + f + ' 秒'; 
+					htitle.html(dateTitle);
+				}
+
+				showTtile();
+				setInterval(showTtile, 512)
 				/**
 				 * idx:
 				 * index of photo that is currently hold
